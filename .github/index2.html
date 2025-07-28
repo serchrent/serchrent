@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serch Rent - Alquiler de Motos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("7JZDp8xYWI9b-1wD-");
+    })();
+  </script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #111827, #2563eb);
+      color: #f9fafb;
+    }
+    header, footer {
+      background-color: #111827;
+      text-align: center;
+      padding: 20px;
+    }
+    .banner {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      color: #111827;
+    }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 16px;
+    }
+    .card-content h3 {
+      margin-bottom: 10px;
+    }
+    .card-content p {
+      font-size: 14px;
+      color: #555;
+    }
+    .card-content button {
+      margin-top: 10px;
+      padding: 10px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .form-container {
+      background: white;
+      color: black;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      position: relative;
+    }
+    .form-container label {
+      display: block;
+      margin-top: 10px;
+    }
+    .form-container input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    .btn {
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .btn-cancel { background: #ccc; }
+    .btn-send { background: #2563eb; color: white; }
+    .btn-whatsapp { background: #25d366; color: white; }
+    .close-btn {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<header><h1>Serch Rent</h1></header>
+<div class="banner">
+  <h2>¡Alquila tu moto ideal!</h2>
+  <p>Rápido, fácil y seguro. Reserva online ahora.</p>
+</div>
+
+<section class="cards" id="motosContainer"></section>
+
+<footer>© 2025 Serch Rent</footer>
+
+<!-- Modal -->
+<div class="modal" id="formModal">
+  <div class="form-container">
+    <span class="close-btn" onclick="closeForm()">✖</span>
+    <h3>Reserva tu moto</h3>
+    <form id="formReserva">
+      <input type="hidden" id="motoElegida" name="moto">
+      <label>Nombre</label>
+      <input type="text" id="nombre" name="nombre" required>
+      <label>Teléfono</label>
+      <input type="tel" id="telefono" name="telefono" required>
+      <label>Correo</label>
+      <input type="email" id="correo" name="correo" required>
+      <label>Fecha</label>
+      <input type="date" id="fecha" name="fecha" required>
+      <div class="actions">
+        <button type="button" class="btn btn-cancel" onclick="closeForm()">Cancelar</button>
+        <button type="button" class="btn btn-whatsapp" onclick="enviarWhatsApp()">WhatsApp</button>
+        <button type="submit" class="btn btn-send">Enviar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  const motos = [
+    {
+      nombre: "AKT 125 NKD",
+      descripcion: "Liviana y confiable, perfecta para la ciudad.",
+      imagen: "https://diverxamotos.com/wp-content/uploads/2023/11/gris.jpg"
+    },
+    {
+      nombre: "Yamaha FZ 2.0",
+      descripcion: "Fuerza y estilo deportivo. Motor 150cc.",
+      imagen: "https://usados.crmotos.com/files/03-2024/ad10016/yamaha-fz-2-0-150-202998023_large.jpg"
+    },
+    {
+      nombre: "Honda Twister 250",
+      descripcion: "Potente, versátil y segura para largos recorridos.",
+      imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/CBF_250.jpg/1200px-CBF_250.jpg"
+    }
+  ];
+
+  const container = document.getElementById("motosContainer");
+  motos.forEach(moto => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <img src="${moto.imagen}" alt="${moto.nombre}">
+      <div class="card-content">
+        <h3>${moto.nombre}</h3>
+        <p>${moto.descripcion}</p>
+        <button onclick="openForm('${moto.nombre}')">Alquilar</button>
+      </div>`;
+    container.appendChild(card);
+  });
+
+  function openForm(moto) {
+    document.getElementById('formModal').style.display = 'flex';
+    document.getElementById('motoElegida').value = moto;
+  }
+
+  function closeForm() {
+    document.getElementById('formModal').style.display = 'none';
+    document.getElementById('formReserva').reset();
+  }
+
+  function enviarWhatsApp() {
+    const nombre = document.getElementById("nombre").value.trim();
+    const telefono = document.getElementById("telefono").value.trim();
+    const correo = document.getElementById("correo").value.trim();
+    const fecha = document.getElementById("fecha").value.trim();
+    const moto = document.getElementById("motoElegida").value.trim();
+
+    if (!nombre || !telefono || !correo || !fecha) {
+      alert("Completa todos los campos.");
+      return;
+    }
+
+    const mensaje = `Hola, soy ${nombre}. Me interesa alquilar la moto ${moto} el día ${fecha}. Tel: ${telefono}, Email: ${correo}`;
+    const numero = "34666666666"; // Cambiar a tu número
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+    window.open(url, "_blank");
+  }
+
+  document.getElementById("formReserva").addEventListener("submit", function(e) {
+    e.preventDefault();
+    emailjs.sendForm("serchrent", "template_edyjris", this)
+      .then(() => {
+        alert("Reserva enviada correctamente.");
+        closeForm();
+      })
+      .catch(error => {
+        alert("Error al enviar: " + error.text);
+      });
+  });
+</script>
+
+</body>
+</html>
