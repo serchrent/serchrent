@@ -3,46 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <header>
-  <div class="header-container">
-    <div class="logo">Serch Rent</div>
-    <div class="header-title">¡Alquila tu moto ideal hoy mismo!</div>
-    </div>
-  </header>
-
+  <title>Serch Rent - Alquiler de Motos</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
   <style>
-
-    .header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.logo {
-  font-size: 20px;
-  font-weight: 600;
-  color: #93c5fd;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 8px 14px;
-  border-radius: 12px;
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
-
-.header-title {
-  font-size: 24px;
-  font-weight: 600;
-  color: white;
-  text-align: right;
-  flex: 1;
-}
-
-    
     * {
       box-sizing: border-box;
       margin: 0;
@@ -58,11 +22,35 @@
 
     header {
       background-color: #111827;
-      color: white;
       padding: 20px;
-      text-align: center;
-      font-size: 28px;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-size: 20px;
       font-weight: 600;
+      color: #93c5fd;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 8px 14px;
+      border-radius: 12px;
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .header-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: white;
+      text-align: right;
+      flex: 1;
     }
 
     .banner {
@@ -234,7 +222,8 @@
       font-weight: 500;
     }
 
-    .form-container input {
+    .form-container input,
+    .form-container select {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
@@ -282,6 +271,14 @@
   </style>
 </head>
 <body>
+
+  <header>
+    <div class="header-container">
+      <div class="logo">Serch Rent</div>
+      <div class="header-title">¡Alquila tu moto ideal hoy mismo!</div>
+    </div>
+  </header>
+
   <div class="banner">
     <div class="banner-content">
       <h2>¡Alquila tu moto ideal hoy mismo!</h2>
@@ -300,6 +297,7 @@
 
   <footer>© 2025 Serch Rent.</footer>
 
+  <!-- Modal -->
   <div id="formModal">
     <div class="form-container">
       <span class="close-btn" onclick="closeForm()">✖</span>
@@ -312,6 +310,12 @@
       <input type="email" id="correo" placeholder="Tu correo">
       <label>Fecha</label>
       <input type="date" id="fecha">
+      <label>Tipo de alquiler</label>
+      <select id="tipoAlquiler">
+        <option value="Días sueltos">Días sueltos</option>
+        <option value="Semanas">Semanas</option>
+        <option value="Meses">Meses</option>
+      </select>
       <input type="hidden" id="motoElegida">
       <div class="actions">
         <button class="btn btn-cancel" onclick="closeForm()">Cancelar</button>
@@ -407,15 +411,16 @@
       const telefono = document.getElementById('telefono').value.trim();
       const correo = document.getElementById('correo').value.trim();
       const fecha = document.getElementById('fecha').value;
+      const tipo = document.getElementById('tipoAlquiler').value;
       const moto = document.getElementById('motoElegida').value;
 
-      if (!nombre || !telefono || !correo || !fecha) {
+      if (!nombre || !telefono || !correo || !fecha || !tipo) {
         alert("Por favor completa todos los campos.");
         return;
       }
 
       const negocioTelefono = "666666666";
-      const mensaje = `Hola, soy ${nombre}, mi teléfono es ${telefono}, mi correo es ${correo}. Me interesa alquilar la moto ${moto} para la fecha ${fecha}.`;
+      const mensaje = `Hola, soy ${nombre}, mi teléfono es ${telefono}, mi correo es ${correo}. Me interesa alquilar la moto ${moto} para la fecha ${fecha} por ${tipo}.`;
       const url = `https://wa.me/${negocioTelefono}?text=${encodeURIComponent(mensaje)}`;
       window.open(url, "_blank");
     }
@@ -425,9 +430,10 @@
       const telefono = document.getElementById('telefono').value.trim();
       const correo = document.getElementById('correo').value.trim();
       const fecha = document.getElementById('fecha').value;
+      const tipo = document.getElementById('tipoAlquiler').value;
       const moto = document.getElementById('motoElegida').value;
 
-      if (!nombre || !telefono || !correo || !fecha) {
+      if (!nombre || !telefono || !correo || !fecha || !tipo) {
         alert("Por favor completa todos los campos.");
         return;
       }
@@ -437,6 +443,7 @@
       formData.append('telefono', telefono);
       formData.append('correo', correo);
       formData.append('fecha', fecha);
+      formData.append('tipo', tipo);
       formData.append('moto', moto);
 
       try {
