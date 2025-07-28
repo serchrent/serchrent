@@ -4,188 +4,202 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Text:wght@400;600&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
   <style>
+    /* Reset */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
+    /* Usamos una fuente similar a tvOS (SF Pro Text) */
     body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(to right, #111827, #2563eb);
-      color: #f9fafb;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      background-color: #000000;
+      color: #FFFFFF;
       min-height: 100vh;
-      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      padding-top: 80px;
       overflow-x: hidden;
+      user-select: none;
     }
 
+    /* Header estilo tvOS: simple, transparente, grande y con sombra */
     header {
       position: fixed;
       top: 20px;
-      left: 20px;
-      padding: 12px 20px;
-      font-size: 28px;
-      font-weight: 700;
-      color: #f9fafb;
-      background: transparent; /* fondo transparente total */
-      border-radius: 0;
-      box-shadow: none;
+      left: 30px;
+      font-size: 32px;
+      font-weight: 600;
+      color: white;
+      text-shadow: 0 0 12px rgba(255 255 255 / 0.6);
+      cursor: default;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 14px;
       z-index: 1000;
+      background: transparent;
       user-select: none;
-      cursor: default;
-      text-shadow: 0 0 6px rgba(0, 0, 0, 0.8), 0 0 8px rgba(37, 99, 235, 0.8);
     }
 
     header span {
-      font-size: 30px;
-      line-height: 1;
-      text-shadow: 0 0 6px rgba(0, 0, 0, 0.8), 0 0 8px rgba(37, 99, 235, 0.8);
+      font-size: 36px;
+      filter: drop-shadow(0 0 6px rgba(255 255 255 / 0.5));
     }
 
+    /* Banner estilo tvOS */
     .banner {
-      height: 300px;
-      animation: bannerAnim 8s ease infinite;
+      background: linear-gradient(90deg, #222222 0%, #1c1c1c 100%);
+      border-radius: 24px;
+      width: 90vw;
+      max-width: 850px;
+      padding: 40px 60px;
+      margin-bottom: 50px;
+      box-shadow:
+        0 12px 40px rgba(255 255 255 / 0.1),
+        0 0 20px rgba(255 255 255 / 0.06);
+      backdrop-filter: saturate(180%) blur(40px);
+      -webkit-backdrop-filter: saturate(180%) blur(40px);
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
       text-align: center;
-      padding: 0 20px;
-      color: white;
-      background: linear-gradient(270deg, #2563eb, #111827, #2563eb);
-      background-size: 600% 600%;
-      border-radius: 20px;
-      margin: 100px 20px 40px;
-      box-shadow: 0 0 40px rgba(37, 99, 235, 0.7);
-    }
-
-    @keyframes bannerAnim {
-      0% {
-        background-position: 0% 50%;
-      }
-
-      50% {
-        background-position: 100% 50%;
-      }
-
-      100% {
-        background-position: 0% 50%;
-      }
+      user-select: none;
     }
 
     .banner-content h2 {
-      font-size: 32px;
-      margin-bottom: 10px;
-      text-shadow: 0 0 10px rgba(255 255 255 / 0.8);
+      font-size: 42px;
+      font-weight: 600;
+      margin-bottom: 18px;
+      letter-spacing: 0.04em;
+      text-shadow: 0 0 20px rgba(255 255 255 / 0.25);
     }
 
     .banner-content p {
-      font-size: 18px;
-      margin-bottom: 20px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      text-shadow: 0 0 5px rgba(0 0 0 / 0.4);
+      font-size: 20px;
+      font-weight: 400;
+      margin-bottom: 28px;
+      max-width: 700px;
+      color: #d0d0d0;
+      text-shadow: 0 0 8px rgba(0 0 0 / 0.7);
+      letter-spacing: 0.03em;
     }
 
+    /* Botón al estilo tvOS */
     .btn-banner {
-      background-color: rgba(255 255 255 / 0.9);
-      color: #2563eb;
-      padding: 12px 28px;
-      border-radius: 12px;
+      background: linear-gradient(180deg, #5a5aff 0%, #3737ff 100%);
+      border-radius: 16px;
+      padding: 14px 50px;
+      color: white;
       font-weight: 700;
+      font-size: 22px;
+      text-transform: uppercase;
       text-decoration: none;
-      transition: background-color 0.3s, box-shadow 0.3s;
-      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.6);
+      box-shadow:
+        0 0 12px #5454ff,
+        0 8px 20px #2e2eff;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      cursor: pointer;
       display: inline-block;
     }
 
-    .btn-banner:hover {
-      background-color: #e0e7ff;
-      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.9);
+    .btn-banner:hover,
+    .btn-banner:focus {
+      outline: none;
+      transform: scale(1.05);
+      box-shadow:
+        0 0 20px #7f7fff,
+        0 12px 32px #5c5cff;
     }
 
+    /* Animación texto grande tipo tvOS */
     #encabezado-animado {
-      text-align: center;
       font-size: 36px;
-      color: white;
-      margin-top: 20px;
-      min-height: 48px;
+      font-weight: 600;
+      color: #c0c0c0;
+      letter-spacing: 0.05em;
+      max-width: 85vw;
+      text-align: center;
+      margin-bottom: 80px;
+      text-shadow: 0 0 12px rgba(255 255 255 / 0.2);
       user-select: none;
-      filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.5));
+      min-height: 48px;
     }
 
     #encabezado-animado::after {
       content: "|";
       animation: blink 0.7s steps(1) infinite;
-      font-weight: bold;
-      color: #e0e7ff;
+      font-weight: 700;
+      color: #7f7fff;
+      margin-left: 4px;
     }
 
     @keyframes blink {
-      0% {
+      0%,
+      100% {
         opacity: 1;
       }
 
       50% {
         opacity: 0;
       }
-
-      100% {
-        opacity: 1;
-      }
     }
 
     footer {
-      background-color: #111827;
-      color: #e5e7eb;
-      text-align: center;
-      padding: 20px;
-      margin-top: 60px;
       font-size: 14px;
+      font-weight: 400;
+      color: #606060;
+      margin-bottom: 20px;
       user-select: none;
     }
 
-    /* WhatsApp floating button */
-
+    /* WhatsApp floating button estilo tvOS */
     .whatsapp-float {
       position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background-color: #25d366;
-      color: white;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      box-shadow: 0 6px 12px rgba(37, 211, 102, 0.5);
+      bottom: 36px;
+      right: 36px;
+      width: 68px;
+      height: 68px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, #00c853 0%, #009624 100%);
+      box-shadow:
+        0 0 18px #00e676,
+        0 8px 32px #00c853;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 32px;
+      color: white;
+      font-size: 36px;
       cursor: pointer;
-      transition: background-color 0.3s, box-shadow 0.3s;
-      z-index: 10000;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
       user-select: none;
+      z-index: 10000;
     }
 
-    .whatsapp-float:hover {
-      background-color: #1ebe57;
-      box-shadow: 0 8px 20px rgba(30, 190, 87, 0.7);
+    .whatsapp-float:hover,
+    .whatsapp-float:focus {
+      outline: none;
+      transform: scale(1.1);
+      box-shadow:
+        0 0 28px #00ff85,
+        0 12px 48px #00e676;
     }
 
-    /* Particles background */
+    /* Particles background: solo puntos muy sutiles */
     #particles-js {
       position: fixed;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
       top: 0;
       left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      pointer-events: none;
     }
   </style>
 </head>
@@ -241,14 +255,14 @@
     // Particles config
     tsParticles.load("particles-js", {
       particles: {
-        number: { value: 40 },
+        number: { value: 25 },
         color: { value: "#ffffff" },
         shape: { type: "circle" },
-        opacity: { value: 0.2 },
-        size: { value: 3 },
+        opacity: { value: 0.1 },
+        size: { value: 2 },
         move: {
           enable: true,
-          speed: 1,
+          speed: 0.5,
           direction: "none",
           outModes: "bounce"
         }
