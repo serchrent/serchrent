@@ -7,55 +7,32 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(to right, #111827, #2563eb);
+      background: linear-gradient(to right, #0f172a, #1e3a8a);
       color: #f9fafb;
       overflow-x: hidden;
     }
 
     header {
-      background-color: #111827;
-      padding: 20px;
-    }
-
-    .header-container {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .logo {
-      font-size: 20px;
-      font-weight: 600;
-      color: #93c5fd;
-      background: rgba(255, 255, 255, 0.05);
-      padding: 8px 14px;
-      border-radius: 12px;
-      backdrop-filter: blur(6px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
-
-    .header-title {
+      padding: 20px 40px;
       font-size: 24px;
       font-weight: 600;
-      color: white;
-      text-align: right;
-      flex: 1;
+      background: rgba(17, 24, 39, 0.6);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      color: #fff;
     }
 
     .banner {
-      height: 300px;
-      animation: bannerAnim 8s ease infinite;
+      height: 320px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -66,10 +43,12 @@
       z-index: 1;
     }
 
-    @keyframes bannerAnim {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    .banner-content {
+      backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
     }
 
     .banner-content h2 {
@@ -81,17 +60,18 @@
       font-size: 18px;
       margin-bottom: 20px;
       max-width: 600px;
-      margin: 0 auto 20px auto;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .btn-banner {
       background-color: white;
       color: #2563eb;
       padding: 10px 20px;
-      border-radius: 12px;
+      border-radius: 8px;
       font-weight: 600;
       text-decoration: none;
-      transition: all 0.3s ease;
+      transition: background-color 0.3s;
     }
 
     .btn-banner:hover {
@@ -110,7 +90,7 @@
     }
 
     .section {
-      padding: 60px 20px;
+      padding: 40px 20px;
       max-width: 1200px;
       margin: auto;
     }
@@ -118,79 +98,73 @@
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 32px;
+      gap: 24px;
     }
 
     .card {
-      backdrop-filter: blur(15px);
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
       overflow: hidden;
+      transition: transform 0.2s;
+      border: 1px solid rgba(255,255,255,0.1);
     }
 
     .card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
     }
 
     .card img {
       width: 100%;
       height: 200px;
       object-fit: cover;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .card-content {
       padding: 20px;
-      color: #ffffff;
     }
 
     .card-content h3 {
-      font-size: 22px;
+      font-size: 20px;
       margin-bottom: 10px;
-      color: #ffffff;
+      color: #fff;
     }
 
     .card-content p {
       font-size: 14px;
-      color: #e0e0e0;
+      color: #d1d5db;
       margin-bottom: 15px;
     }
 
     .card-content button {
-      background-color: rgba(255, 255, 255, 0.2);
-      color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.4);
+      background-color: #2563eb;
+      color: white;
+      border: none;
       padding: 10px 20px;
-      border-radius: 10px;
+      border-radius: 8px;
       font-size: 14px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(4px);
     }
 
     .card-content button:hover {
-      background-color: rgba(255, 255, 255, 0.35);
-      color: #111827;
+      background-color: #1e40af;
     }
 
     footer {
-      background-color: #111827;
+      background-color: rgba(17, 24, 39, 0.6);
       color: #e5e7eb;
       text-align: center;
       padding: 20px;
-      margin-top: 60px;
       font-size: 14px;
+      backdrop-filter: blur(10px);
     }
 
     #formModal {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
+      background-color: rgba(0,0,0,0.6);
       display: none;
       justify-content: center;
       align-items: center;
@@ -198,16 +172,15 @@
     }
 
     .form-container {
-      backdrop-filter: blur(20px);
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
       padding: 30px;
-      border-radius: 20px;
+      border-radius: 16px;
       width: 90%;
-      max-width: 400px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      max-width: 420px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
       position: relative;
-      color: white;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
     }
 
     .form-container h3 {
@@ -222,23 +195,23 @@
       font-weight: 500;
     }
 
-    .form-container input,
-    .form-container select {
+    .form-container input, .form-container select {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
       border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      background-color: rgba(255, 255, 255, 0.1);
+      border: none;
+      outline: none;
+      background: rgba(255, 255, 255, 0.15);
       color: white;
-      backdrop-filter: blur(5px);
     }
 
     .form-container .actions {
       margin-top: 20px;
       display: flex;
-      justify-content: space-between;
+      flex-wrap: wrap;
       gap: 10px;
+      justify-content: space-between;
     }
 
     .form-container .btn {
@@ -247,16 +220,20 @@
       border: none;
       cursor: pointer;
       font-weight: 600;
-      transition: all 0.3s ease;
     }
 
     .btn-cancel {
-      background-color: rgba(255, 255, 255, 0.2);
-      color: white;
+      background-color: #e5e7eb;
+      color: #1f2937;
     }
 
     .btn-whatsapp {
       background-color: #25d366;
+      color: white;
+    }
+
+    .btn-enviar {
+      background-color: #2563eb;
       color: white;
     }
 
@@ -266,17 +243,19 @@
       right: 15px;
       font-size: 18px;
       cursor: pointer;
-      color: white;
+    }
+
+    #precioEstimado {
+      margin-top: 8px;
+      font-weight: bold;
+      color: #93c5fd;
     }
   </style>
 </head>
-<body>
 
+<body>
   <header>
-    <div class="header-container">
-      <div class="logo">Serch Rent</div>
-      <div class="header-title">¡Alquila tu moto ideal hoy mismo!</div>
-    </div>
+    <div>Serch Rent</div>
   </header>
 
   <div class="banner">
@@ -297,7 +276,6 @@
 
   <footer>© 2025 Serch Rent.</footer>
 
-  <!-- Modal -->
   <div id="formModal">
     <div class="form-container">
       <span class="close-btn" onclick="closeForm()">✖</span>
@@ -311,16 +289,17 @@
       <label>Fecha</label>
       <input type="date" id="fecha">
       <label>Tipo de alquiler</label>
-      <select id="tipoAlquiler">
+      <select id="tipoAlquiler" onchange="actualizarPrecio()">
         <option value="Días sueltos">Días sueltos</option>
         <option value="Semanas">Semanas</option>
         <option value="Meses">Meses</option>
       </select>
+      <p id="precioEstimado"></p>
       <input type="hidden" id="motoElegida">
       <div class="actions">
         <button class="btn btn-cancel" onclick="closeForm()">Cancelar</button>
         <button class="btn btn-whatsapp" onclick="enviarWhatsApp()">WhatsApp</button>
-        <button class="btn btn-whatsapp" style="background-color:#2563eb;" onclick="enviarFormulario()">Enviar</button>
+        <button class="btn btn-enviar" onclick="enviarFormulario()">Enviar</button>
       </div>
     </div>
   </div>
@@ -335,46 +314,47 @@
       "Rápido, cómodo y al mejor precio"
     ];
     const textoEncabezado = frases[Math.floor(Math.random() * frases.length)];
-    const velocidadEscritura = 80;
     let i = 0;
     function escribirTitulo() {
       if (i < textoEncabezado.length) {
         document.getElementById("encabezado-animado").innerHTML += textoEncabezado.charAt(i);
         i++;
-        setTimeout(escribirTitulo, velocidadEscritura);
+        setTimeout(escribirTitulo, 80);
       }
     }
     window.addEventListener("load", escribirTitulo);
+  </script>
 
+  <script>
     const motos = [
       {
         nombre: "AKT 125 NKD",
-        descripcion: "Liviana y confiable, perfecta para el tráfico urbano...",
+        descripcion: "Liviana y confiable, perfecta para el tráfico urbano.",
         imagen: "https://diverxamotos.com/wp-content/uploads/2023/11/gris.jpg"
       },
       {
         nombre: "Yamaha FZ 2.0",
-        descripcion: "Combina fuerza y estética deportiva...",
+        descripcion: "Combina fuerza y estética deportiva con motor de 150cc.",
         imagen: "https://usados.crmotos.com/files/03-2024/ad10016/yamaha-fz-2-0-150-202998023_large.jpg"
       },
       {
         nombre: "Bajaj Pulsar NS 160",
-        descripcion: "Diseñada para largas distancias sin renunciar al estilo...",
+        descripcion: "Diseñada para largas distancias sin renunciar al estilo.",
         imagen: "https://www.rutamotor.com/wp-content/uploads/2023/01/bajaj-pulsar-rutamotor-03.jpg"
       },
       {
         nombre: "Vespa Clásica",
-        descripcion: "Un ícono sobre ruedas. Elegancia italiana con diseño retro...",
+        descripcion: "Un ícono sobre ruedas. Elegancia italiana con diseño retro.",
         imagen: "https://www.motociclismo.es/uploads/s1/65/08/23/7/vespa-lml-star-4-tiempos.jpeg"
       },
       {
         nombre: "Honda Twister 250",
-        descripcion: "Potente, versátil y segura. Motor de 250cc...",
+        descripcion: "Potente, versátil y segura. Ideal para ciudad y carretera.",
         imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/CBF_250.jpg/1200px-CBF_250.jpg"
       },
       {
         nombre: "Honda ADV 350",
-        descripcion: "La aventura sobre dos ruedas. Estilo SUV, suspensión inteligente...",
+        descripcion: "La aventura sobre dos ruedas. Recomendada para explorar.",
         imagen: "https://www.honda.es/content/dam/central/motorcycles/colour-picker/scooter/adv350/adv350_2025/r-348_hyper_red/25YM_ADV350_Studio_HYPER_RED_R-348_RHS_ORIGINAL.png/_jcr_content/renditions/c2_r.png"
       }
     ];
@@ -400,10 +380,22 @@
       document.getElementById('telefono').value = '';
       document.getElementById('correo').value = '';
       document.getElementById('fecha').value = '';
+      actualizarPrecio();
     }
 
     function closeForm() {
       document.getElementById('formModal').style.display = 'none';
+    }
+
+    function actualizarPrecio() {
+      const tipo = document.getElementById("tipoAlquiler").value;
+      let precio = "";
+      switch (tipo) {
+        case "Días sueltos": precio = "12 € por día"; break;
+        case "Semanas": precio = "70 € por semana"; break;
+        case "Meses": precio = "160 € por mes"; break;
+      }
+      document.getElementById("precioEstimado").textContent = "Precio estimado: " + precio;
     }
 
     function enviarWhatsApp() {
@@ -413,15 +405,12 @@
       const fecha = document.getElementById('fecha').value;
       const tipo = document.getElementById('tipoAlquiler').value;
       const moto = document.getElementById('motoElegida').value;
-
-      if (!nombre || !telefono || !correo || !fecha || !tipo) {
+      if (!nombre || !telefono || !correo || !fecha) {
         alert("Por favor completa todos los campos.");
         return;
       }
-
-      const negocioTelefono = "666666666";
-      const mensaje = `Hola, soy ${nombre}, mi teléfono es ${telefono}, mi correo es ${correo}. Me interesa alquilar la moto ${moto} para la fecha ${fecha} por ${tipo}.`;
-      const url = `https://wa.me/${negocioTelefono}?text=${encodeURIComponent(mensaje)}`;
+      const mensaje = `Hola, soy ${nombre}, me interesa alquilar la moto ${moto} para la fecha ${fecha}, tipo de alquiler: ${tipo}. Mi teléfono: ${telefono}, correo: ${correo}`;
+      const url = `https://wa.me/666666666?text=${encodeURIComponent(mensaje)}`;
       window.open(url, "_blank");
     }
 
@@ -432,12 +421,10 @@
       const fecha = document.getElementById('fecha').value;
       const tipo = document.getElementById('tipoAlquiler').value;
       const moto = document.getElementById('motoElegida').value;
-
-      if (!nombre || !telefono || !correo || !fecha || !tipo) {
+      if (!nombre || !telefono || !correo || !fecha) {
         alert("Por favor completa todos los campos.");
         return;
       }
-
       const formData = new FormData();
       formData.append('nombre', nombre);
       formData.append('telefono', telefono);
@@ -445,7 +432,6 @@
       formData.append('fecha', fecha);
       formData.append('tipo', tipo);
       formData.append('moto', moto);
-
       try {
         const response = await fetch('guardar_formulario.php', {
           method: 'POST',
@@ -478,9 +464,7 @@
           outModes: "bounce"
         }
       },
-      background: {
-        color: "transparent"
-      },
+      background: { color: "transparent" },
       fullScreen: { enable: false }
     });
   </script>
