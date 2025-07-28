@@ -3,10 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alquiler de Motos</title>
+  <header>
+  <div class="header-container">
+    <div class="logo">Serch Rent</div>
+    <div class="header-title">¡Alquila tu moto ideal hoy mismo!</div>
+    </div>
+  </header>
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
   <style>
+
+    .header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 600;
+  color: #93c5fd;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px 14px;
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.header-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+  text-align: right;
+  flex: 1;
+}
+
+    
     * {
       box-sizing: border-box;
       margin: 0;
