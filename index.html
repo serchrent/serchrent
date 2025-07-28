@@ -3,340 +3,434 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <title>Serch Rent</title>
+  <link rel="icon" href="http://d1ujqdpfgkvqfi.cloudfront.net/favicon-generator/htdocs/favicons/2025-07-23/f0858b37f1e36f641bce9c669658410b.ico" type="image/ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
   <style>
-    /* Reset y básicos */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Inter', sans-serif;
       background: linear-gradient(to right, #111827, #2563eb);
       color: #f9fafb;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px 20px;
     }
 
-    h1 {
-      margin-bottom: 40px;
-      font-weight: 600;
-      font-size: 2.5rem;
+    header {
+      background-color: #111827;
+      color: white;
+      padding: 20px;
       text-align: center;
-      color: #fff;
-      user-select: none;
+      font-size: 28px;
+      font-weight: 600;
     }
 
-    /* Contenedor grid de cards */
+    .banner {
+      height: 300px;
+      animation: bannerAnim 8s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+      color: white;
+    }
+
+    @keyframes bannerAnim {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .banner-content h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .banner-content p {
+      font-size: 18px;
+      margin-bottom: 20px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-banner {
+      background-color: white;
+      color: #2563eb;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .btn-banner:hover {
+      background-color: #e0e7ff;
+    }
+
+    #encabezado-animado::after {
+      content: "|";
+      animation: blink 0.7s steps(1) infinite;
+      font-weight: bold;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .section {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 24px;
-      width: 100%;
-      max-width: 900px;
     }
 
-    /* Card glass style cuadrada */
     .card {
-      background: rgba(255, 255, 255, 0.1);
+      background: #fff;
       border-radius: 16px;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow:
-        0 4px 6px rgba(0, 0, 0, 0.15),
-        inset 0 0 30px rgba(255, 255, 255, 0.15);
-      cursor: pointer;
-      text-align: center;
-      padding: 12px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      user-select: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      overflow: hidden;
+      transition: transform 0.2s;
     }
 
     .card:hover {
-      transform: translateY(-8px);
-      box-shadow:
-        0 10px 20px rgba(0, 0, 0, 0.3),
-        inset 0 0 40px rgba(255, 255, 255, 0.25);
+      transform: translateY(-4px);
     }
 
-    /* Imagen cuadrada con objeto cubierto */
     .card img {
-      width: 140px;
-      height: 140px;
-      object-fit: cover;
-      border-radius: 12px;
-      margin-bottom: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      transition: transform 0.3s ease;
-      user-select: none;
-    }
-
-    .card:hover img {
-      transform: scale(1.05);
-    }
-
-    /* Nombre del modelo */
-    .card h3 {
-      color: #e0e7ff;
-      font-weight: 600;
-      font-size: 1.1rem;
-      text-shadow: 0 0 6px rgba(0,0,0,0.7);
-      user-select: none;
-    }
-
-    /* Modal fondo */
-    #infoModal {
-      position: fixed;
-      top: 0;
-      left: 0;
       width: 100%;
-      height: 100%;
-      background: rgba(17, 24, 39, 0.85);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 10000;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-content {
       padding: 20px;
     }
 
-    /* Modal caja con efecto glass más claro */
-    #infoModal > div {
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 20px;
-      max-width: 600px;
-      width: 100%;
-      padding: 30px 25px;
-      box-shadow:
-        0 15px 40px rgba(0, 0, 0, 0.6),
-        inset 0 0 40px rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
+    .card-content h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
       color: #111827;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      animation: modalFadeIn 0.3s ease forwards;
     }
 
-    @keyframes modalFadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .card-content p {
+      font-size: 14px;
+      color: #6b7280;
+      margin-bottom: 15px;
     }
 
-    /* Imagen modal rectangular */
-    #infoModal img {
-      width: 100%;
-      height: 320px;
-      object-fit: cover;
-      border-radius: 16px;
-      margin-bottom: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-      user-select: none;
-    }
-
-    #infoModal h3 {
-      margin-bottom: 12px;
-      font-weight: 700;
-      font-size: 1.8rem;
-      color: #111827;
-      text-align: center;
-    }
-
-    #infoModal p {
-      font-size: 1rem;
-      line-height: 1.5;
-      color: #2d3748;
-      margin-bottom: 30px;
-      text-align: center;
-      user-select: text;
-    }
-
-    /* Botón alquilar modal */
-    #infoModal button {
+    .card-content button {
       background-color: #2563eb;
       color: white;
       border: none;
-      padding: 14px 36px;
-      border-radius: 12px;
-      font-size: 1.1rem;
-      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
       cursor: pointer;
-      box-shadow: 0 6px 15px rgba(37, 99, 235, 0.7);
-      transition: background-color 0.25s ease;
-      user-select: none;
     }
 
-    #infoModal button:hover {
+    .card-content button:hover {
       background-color: #1e40af;
     }
 
-    /* Botón cerrar modal */
-    #infoModal .close-btn {
-      position: absolute;
-      top: 18px;
-      right: 24px;
-      font-size: 28px;
-      color: #111827;
-      cursor: pointer;
-      font-weight: 700;
-      user-select: none;
-      transition: color 0.2s ease;
-      background: rgba(255,255,255,0.5);
-      border-radius: 50%;
-      width: 36px;
-      height: 36px;
-      line-height: 36px;
+    footer {
+      background-color: #111827;
+      color: #e5e7eb;
       text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      padding: 20px;
+      margin-top: 60px;
+      font-size: 14px;
     }
 
-    #infoModal .close-btn:hover {
-      color: #2563eb;
+    #formModal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .form-container {
       background: white;
+      padding: 30px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      position: relative;
     }
 
-    /* Responsive */
-    @media (max-width: 640px) {
-      .card img {
-        width: 120px;
-        height: 120px;
-      }
+    .form-container h3 {
+      margin-bottom: 15px;
+      font-size: 22px;
+      text-align: center;
+    }
 
-      #infoModal > div {
-        padding: 20px 16px;
-      }
+    .form-container label {
+      display: block;
+      margin-top: 10px;
+      font-weight: 500;
+    }
 
-      #infoModal img {
-        height: 220px;
-      }
+    .form-container input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .form-container .actions {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .form-container .btn {
+      padding: 10px 15px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .btn-cancel {
+      background-color: #e5e7eb;
+      color: #1f2937;
+    }
+
+    .btn-whatsapp {
+      background-color: #25d366;
+      color: white;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 18px;
+      cursor: pointer;
     }
   </style>
 </head>
 
 <body>
-  <h1>Motos disponibles</h1>
 
-  <div class="cards" id="motosContainer"></div>
-
-  <!-- Modal info moto -->
-  <div id="infoModal">
-    <div>
-      <span class="close-btn" onclick="closeInfoModal()">×</span>
-      <img id="infoMotoImg" src="" alt="Foto moto" />
-      <h3 id="infoMotoNombre"></h3>
-      <p id="infoMotoDesc"></p>
-      <button onclick="openForm()">Alquilar</button>
+  <div class="banner">
+    <div class="banner-content">
+      <h2>¡Alquila tu moto ideal hoy mismo!</h2>
+      <p>Disfruta la libertad de moverte con estilo, rapidez y seguridad.</p>
+      <a href="#formModal" class="btn-banner" onclick="openForm('')">Contáctanos</a>
     </div>
   </div>
 
-  <!-- Modal alquiler (simplificado para demo) -->
-  <div id="formModal" style="display:none;">
-    <!-- Puedes implementar este modal de alquiler como prefieras -->
+  <h1 id="encabezado-animado" style="text-align:center; font-size:36px; color:white; margin-top:40px;"></h1>
+
+  <div id="particles-js" style="position: fixed; width: 100%; height: 100%; z-index: -1; top: 0; left: 0;"></div>
+
+  <section class="section">
+    <div class="cards" id="motosContainer"></div>
+  </section>
+
+  <footer>© 2025 Serch Rent.</footer>
+
+  <!-- Modal -->
+  <div id="formModal">
+    <div class="form-container">
+      <span class="close-btn" onclick="closeForm()">✖</span>
+      <h3>Solicitar alquiler</h3>
+      <label>Nombre</label>
+      <input type="text" id="nombre" placeholder="Tu nombre">
+      <label>Teléfono</label>
+      <input type="tel" id="telefono" placeholder="Tu teléfono">
+	  <label>Correo electrónico</label>
+      <input type="email" id="correo" placeholder="Tu correo">
+      <label>Fecha</label>
+      <input type="date" id="fecha">
+      <input type="hidden" id="motoElegida">
+      <div class="actions">
+        <button class="btn btn-cancel" onclick="closeForm()">Cancelar</button>
+        <button class="btn btn-whatsapp" onclick="enviarWhatsApp()">WhatsApp</button>
+        <button class="btn btn-whatsapp" style="background-color:#2563eb;" onclick="enviarFormulario()">Enviar</button>
+      </div>
+    </div>
   </div>
+
+  <!-- Scripts -->
+  <script>
+    const frases = [
+      "Alquila tu moto ideal para cada aventura",
+      "Explora la ciudad con libertad y estilo",
+      "Conduce con potencia, seguridad y elegancia",
+      "Tu viaje comienza con nosotros",
+      "Descubre las mejores motos sin complicaciones",
+      "Rápido, cómodo y al mejor precio"
+    ];
+    const textoEncabezado = frases[Math.floor(Math.random() * frases.length)];
+    const velocidadEscritura = 80;
+    let i = 0;
+    function escribirTitulo() {
+      if (i < textoEncabezado.length) {
+        document.getElementById("encabezado-animado").innerHTML += textoEncabezado.charAt(i);
+        i++;
+        setTimeout(escribirTitulo, velocidadEscritura);
+      }
+    }
+    window.addEventListener("load", escribirTitulo);
+  </script>
 
   <script>
     const motos = [
       {
         nombre: "AKT 125 NKD",
-        descripcion:
-          "Liviana y confiable, perfecta para el tráfico urbano. Bajo consumo de combustible, mantenimiento sencillo y un diseño compacto que se adapta a cualquier ciudad.",
-        imagen: "https://diverxamotos.com/wp-content/uploads/2023/11/gris.jpg",
+        descripcion: "Liviana y confiable, perfecta para el tráfico urbano. Bajo consumo de combustible, mantenimiento sencillo y un diseño compacto que se adapta a cualquier ciudad.",
+        imagen: "https://diverxamotos.com/wp-content/uploads/2023/11/gris.jpg"
       },
       {
         nombre: "Yamaha FZ 2.0",
-        descripcion:
-          "Combina fuerza y estética deportiva. Su motor de 150cc ofrece aceleración potente para trayectos dinámicos, mientras que su chasis robusto brinda estabilidad en curvas.",
-        imagen:
-          "https://usados.crmotos.com/files/03-2024/ad10016/Foto-moto-15712-1.webp",
+        descripcion: "Combina fuerza y estética deportiva. Su motor de 150cc ofrece aceleración potente para trayectos dinámicos, mientras que su chasis robusto brinda estabilidad en curvas.",
+        imagen: "https://usados.crmotos.com/files/03-2024/ad10016/yamaha-fz-2-0-150-202998023_large.jpg"
       },
       {
-        nombre: "Honda CB 500X",
-        descripcion:
-          "Versátil y cómoda para viajes largos. Equipamiento moderno y motor de 471cc que garantiza un rendimiento equilibrado tanto en carretera como en ciudad.",
-        imagen:
-          "https://usados.crmotos.com/files/03-2024/ad10016/Foto-moto-15694-1.webp",
+        nombre: "Bajaj Pulsar NS 160",
+        descripcion: "Diseñada para largas distancias sin renunciar al estilo. Suspensión cómoda, frenos de disco y un motor preciso que responde rápido en carretera abierta o zonas urbanas.",
+        imagen: "https://www.rutamotor.com/wp-content/uploads/2023/01/bajaj-pulsar-rutamotor-03.jpg"
       },
       {
-        nombre: "Suzuki GSX-R 600",
-        descripcion:
-          "Deportiva y ágil, ideal para quienes buscan emociones fuertes. Motor potente de 600cc, aerodinámica avanzada y frenos ABS para máxima seguridad.",
-        imagen:
-          "https://usados.crmotos.com/files/03-2024/ad10016/Foto-moto-15696-1.webp",
+        nombre: "Vespa Clásica",
+        descripcion: "Un ícono sobre ruedas. Elegancia italiana con diseño retro, ideal para quienes buscan estilo sin renunciar al confort. Perfecta para escapadas urbanas con personalidad.",
+        imagen: "https://www.motociclismo.es/uploads/s1/65/08/23/7/vespa-lml-star-4-tiempos.jpeg"
       },
+      {
+        nombre: "Honda Twister 250",
+        descripcion: "Potente, versátil y segura. Su motor de 250cc rinde tanto en ciudad como en carretera. Ideal para conductores que buscan comodidad y rendimiento sin esfuerzo.",
+        imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/CBF_250.jpg/1200px-CBF_250.jpg"
+      },
+      {
+        nombre: "Honda ADV 350",
+        descripcion: "La aventura sobre dos ruedas. Estilo SUV, suspensión inteligente y espacio bajo el asiento para llevar lo que necesites. Recomendada para explorar más allá del pavimento.",
+        imagen: "https://www.honda.es/content/dam/central/motorcycles/colour-picker/scooter/adv350/adv350_2025/r-348_hyper_red/25YM_ADV350_Studio_HYPER_RED_R-348_RHS_ORIGINAL.png/_jcr_content/renditions/c2_r.png"
+      }
     ];
-
     const container = document.getElementById("motosContainer");
-
-    motos.forEach((moto, index) => {
+    motos.forEach(moto => {
       const card = document.createElement("div");
       card.className = "card";
-      card.setAttribute("tabindex", "0"); // accesibilidad
-      card.setAttribute("role", "button");
-      card.setAttribute("aria-pressed", "false");
       card.innerHTML = `
-        <img src="${moto.imagen}" alt="Foto de ${moto.nombre}" />
-        <h3>${moto.nombre}</h3>
+        <img src="${moto.imagen}" alt="${moto.nombre}">
+        <div class="card-content">
+          <h3>${moto.nombre}</h3>
+          <p>${moto.descripcion}</p>
+          <button onclick="openForm('${moto.nombre}')">Alquilar</button>
+        </div>
       `;
-      card.addEventListener("click", () => openInfoModal(index));
-      card.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          openInfoModal(index);
-        }
-      });
       container.appendChild(card);
     });
+  </script>
 
-    function openInfoModal(index) {
-      const moto = motos[index];
-      if (!moto) return;
-
-      document.getElementById("infoMotoImg").src = moto.imagen;
-      document.getElementById("infoMotoImg").alt = `Foto de ${moto.nombre}`;
-      document.getElementById("infoMotoNombre").textContent = moto.nombre;
-      document.getElementById("infoMotoDesc").textContent = moto.descripcion;
-
-      // Guardar el nombre en botón alquilar para usar luego
-      const btnAlquilar = document.querySelector("#infoModal button");
-      btnAlquilar.dataset.moto = moto.nombre;
-
-      document.getElementById("infoModal").style.display = "flex";
-      document.body.style.overflow = "hidden"; // Evitar scroll fondo
+  <script>
+    function openForm(moto) {
+      document.getElementById('formModal').style.display = 'flex';
+      document.getElementById('motoElegida').value = moto;
+      document.getElementById('nombre').value = '';
+      document.getElementById('telefono').value = '';
+      document.getElementById('fecha').value = '';
     }
 
-    function closeInfoModal() {
-      document.getElementById("infoModal").style.display = "none";
-      document.body.style.overflow = "auto";
+    function closeForm() {
+      document.getElementById('formModal').style.display = 'none';
     }
 
-    function openForm() {
-      const btnAlquilar = document.querySelector("#infoModal button");
-      const motoNombre = btnAlquilar.dataset.moto;
-      alert(`Aquí abriría el formulario para alquilar: ${motoNombre}`);
-      // Aquí puedes abrir tu modal de formulario o redirigir
+    function enviarWhatsApp() {
+     const nombre = document.getElementById('nombre').value.trim();
+     const telefono = document.getElementById('telefono').value.trim();
+     const correo = document.getElementById('correo').value.trim();
+     const fecha = document.getElementById('fecha').value;
+     const moto = document.getElementById('motoElegida').value;
+
+  if (!nombre || !telefono || !correo || !fecha) {
+    alert("Por favor completa todos los campos.");
+    return;
+      }
+
+      const negocioTelefono = "666666666"; // Cambia este número
+      const mensaje = `Hola, soy ${nombre}, mi teléfono es ${telefono}, mi correo es ${correo}. Me interesa alquilar la moto ${moto} para la fecha ${fecha}.`;
+      const url = `https://wa.me/${negocioTelefono}?text=${encodeURIComponent(mensaje)}`;
+      window.open(url, "_blank");
     }
 
-    // Cerrar modal con click fuera contenido
-    document.getElementById("infoModal").addEventListener("click", (e) => {
-      if (e.target.id === "infoModal") closeInfoModal();
+    async function enviarFormulario() {
+      const nombre = document.getElementById('nombre').value.trim();
+      const telefono = document.getElementById('telefono').value.trim();
+	  const correo = document.getElementById('correo').value.trim();
+      const fecha = document.getElementById('fecha').value;
+      const moto = document.getElementById('motoElegida').value;
+
+      if (!nombre || !telefono || !correo || !fecha) {
+        alert("Por favor completa todos los campos.");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('nombre', nombre);
+      formData.append('telefono', telefono);
+	  formData.append('correo', correo);
+      formData.append('fecha', fecha);
+      formData.append('moto', moto);
+
+      try {
+        const response = await fetch('guardar_formulario.php', {
+          method: 'POST',
+          body: formData
+        });
+        if (!response.ok) throw new Error('Error al enviar');
+        const text = await response.text();
+        alert(text);
+        closeForm();
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+
+    // Cerrar modal al hacer clic fuera del contenido
+    document.getElementById("formModal").addEventListener("click", function (e) {
+      if (e.target === this) closeForm();
     });
   </script>
-</body>
 
+  <script>
+    tsParticles.load("particles-js", {
+      particles: {
+        number: { value: 40 },
+        color: { value: "#ffffff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.2 },
+        size: { value: 3 },
+        move: {
+          enable: true,
+          speed: 1,
+          direction: "none",
+          outModes: "bounce"
+        }
+      },
+      background: {
+        color: "transparent"
+      },
+      fullScreen: { enable: false }
+    });
+  </script>
+
+</body>
 </html>
