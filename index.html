@@ -17,51 +17,50 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #1a1a2e, #0f3460);
-      color: #f0f0f0;
+      background: linear-gradient(to right, #111827, #2563eb);
+      color: #f9fafb;
       min-height: 100vh;
     }
 
     header {
-      background-color: #16213e;
-      color: #ffd369;
-      padding: 25px;
+      background-color: #111827;
+      color: white;
+      padding: 20px;
       text-align: center;
-      font-size: 30px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-shadow: 0 0 8px #ffd369;
+      font-size: 28px;
+      font-weight: 600;
     }
 
+    /* Banner con partículas animadas */
     .banner {
+      position: relative;
       height: 320px;
-      background: linear-gradient(270deg, #f05454, #30475e, #f05454);
-      background-size: 600% 600%;
-      animation: bannerAnim 12s ease infinite;
+      background: #f05454; /* fallback color */
+      border-radius: 16px;
+      margin: 20px auto;
+      max-width: 900px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(240, 84, 84, 0.6);
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
       padding: 0 20px;
       color: #fff;
-      box-shadow: 0 4px 15px rgba(240, 84, 84, 0.6);
-      border-radius: 16px;
-      margin: 20px auto;
-      max-width: 900px;
     }
 
-    @keyframes bannerAnim {
-      0% {
-        background-position: 0% 50%;
-      }
+    #bannerParticles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+    }
 
-      50% {
-        background-position: 100% 50%;
-      }
-
-      100% {
-        background-position: 0% 50%;
-      }
+    .banner-content {
+      position: relative;
+      z-index: 1;
     }
 
     .banner-content h2 {
@@ -92,6 +91,7 @@
       font-size: 18px;
       display: inline-block;
       letter-spacing: 1px;
+      z-index: 1;
     }
 
     .btn-banner:hover {
@@ -101,121 +101,78 @@
 
     #encabezado-animado {
       text-align: center;
-      font-size: 38px;
-      color: #ffb347;
-      margin-top: 50px;
-      font-weight: 700;
-      letter-spacing: 1.2px;
-      text-shadow: 0 0 8px #ffa500;
-    }
-
-    #encabezado-animado::after {
-      content: "|";
-      animation: blink 0.7s steps(1) infinite;
-      font-weight: bold;
-      color: #ffb347;
-    }
-
-    @keyframes blink {
-      0% {
-        opacity: 1;
-      }
-
-      50% {
-        opacity: 0;
-      }
-
-      100% {
-        opacity: 1;
-      }
+      font-size: 36px;
+      color: white;
+      margin-top: 40px;
     }
 
     .section {
-      padding: 50px 20px;
+      padding: 40px 20px;
       max-width: 1200px;
       margin: auto;
     }
 
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
     }
 
     .card {
-      background: #1e1e2f;
-      border-radius: 18px;
-      box-shadow: 0 12px 25px rgba(240, 84, 84, 0.35);
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
       overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
+      transition: transform 0.2s;
     }
 
     .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 18px 35px rgba(255, 111, 0, 0.7);
+      transform: translateY(-4px);
     }
 
     .card img {
       width: 100%;
-      height: 220px;
+      height: 200px;
       object-fit: cover;
-      filter: brightness(0.9);
-      transition: filter 0.3s ease;
-    }
-
-    .card:hover img {
-      filter: brightness(1);
     }
 
     .card-content {
-      padding: 24px 20px;
+      padding: 20px;
     }
 
     .card-content h3 {
-      font-size: 22px;
-      margin-bottom: 12px;
-      color: #ff8c00;
-      font-weight: 700;
-      text-shadow: 0 0 6px #ff6f00;
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #111827;
     }
 
     .card-content p {
-      font-size: 15px;
-      color: #d1d5db;
-      margin-bottom: 20px;
-      line-height: 1.4;
-      font-weight: 500;
+      font-size: 14px;
+      color: #6b7280;
+      margin-bottom: 15px;
     }
 
     .card-content button {
-      background-color: #25d366;
+      background-color: #2563eb;
       color: white;
       border: none;
-      padding: 12px 26px;
-      border-radius: 30px;
-      font-size: 15px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
       cursor: pointer;
-      font-weight: 700;
-      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.6);
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .card-content button:hover {
-      background-color: #1ebe57;
-      box-shadow: 0 6px 22px rgba(30, 190, 87, 0.8);
+      background-color: #1e40af;
     }
 
     footer {
-      background-color: #16213e;
-      color: #f1f5f9;
+      background-color: #111827;
+      color: #e5e7eb;
       text-align: center;
-      padding: 25px;
-      margin-top: 80px;
-      font-size: 15px;
-      font-weight: 500;
-      letter-spacing: 0.8px;
-      text-shadow: 0 0 5px #ff8c00;
+      padding: 20px;
+      margin-top: 60px;
+      font-size: 14px;
     }
 
     #formModal {
@@ -224,121 +181,81 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.85);
+      background-color: rgba(0, 0, 0, 0.6);
       display: none;
       justify-content: center;
       align-items: center;
       z-index: 9999;
-      padding: 15px;
     }
 
     .form-container {
-      background: #1e1e2f;
-      padding: 35px 30px;
-      border-radius: 16px;
-      width: 100%;
-      max-width: 430px;
-      box-shadow: 0 10px 35px rgba(255, 111, 0, 0.7);
-      color: #f0f0f0;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
       position: relative;
-      font-weight: 600;
     }
 
     .form-container h3 {
-      margin-bottom: 25px;
-      font-size: 26px;
+      margin-bottom: 15px;
+      font-size: 22px;
       text-align: center;
-      color: #ff8c00;
-      text-shadow: 0 0 10px #ff6f00;
     }
 
     .form-container label {
       display: block;
-      margin-top: 15px;
-      font-weight: 600;
-      color: #ffd369;
+      margin-top: 10px;
+      font-weight: 500;
     }
 
     .form-container input {
       width: 100%;
-      padding: 12px;
-      margin-top: 8px;
-      border-radius: 10px;
-      border: 1px solid #ff8c00;
-      background-color: #2a2a40;
-      color: #f0f0f0;
-      font-weight: 500;
-      transition: border-color 0.3s ease;
-    }
-
-    .form-container input:focus {
-      border-color: #ffb347;
-      outline: none;
-      box-shadow: 0 0 8px #ffb347;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
     }
 
     .form-container .actions {
-      margin-top: 30px;
+      margin-top: 20px;
       display: flex;
       justify-content: space-between;
-      gap: 12px;
     }
 
     .form-container .btn {
-      padding: 12px 20px;
-      border-radius: 30px;
+      padding: 10px 15px;
+      border-radius: 8px;
       border: none;
       cursor: pointer;
-      font-weight: 700;
-      flex: 1;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      letter-spacing: 0.8px;
-      font-size: 15px;
+      font-weight: 600;
     }
 
     .btn-cancel {
-      background-color: #44475a;
-      color: #ffd369;
-      box-shadow: 0 4px 12px rgba(68, 71, 90, 0.8);
-    }
-
-    .btn-cancel:hover {
-      background-color: #555a7a;
-      box-shadow: 0 6px 16px rgba(85, 90, 122, 0.9);
+      background-color: #e5e7eb;
+      color: #1f2937;
     }
 
     .btn-whatsapp {
       background-color: #25d366;
       color: white;
-      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.7);
-    }
-
-    .btn-whatsapp:hover {
-      background-color: #1ebe57;
-      box-shadow: 0 6px 18px rgba(30, 190, 87, 0.85);
     }
 
     .close-btn {
       position: absolute;
-      top: 12px;
-      right: 18px;
-      font-size: 22px;
+      top: 10px;
+      right: 15px;
+      font-size: 18px;
       cursor: pointer;
-      color: #ff8c00;
-      transition: color 0.3s ease;
-    }
-
-    .close-btn:hover {
-      color: #ffa500;
     }
   </style>
 </head>
 
 <body>
 
-  <header>Serch Rent</header>
-
   <div class="banner">
+    <div id="bannerParticles"></div>
     <div class="banner-content">
       <h2>¡Alquila tu moto ideal hoy mismo!</h2>
       <p>Disfruta la libertad de moverte con estilo, rapidez y seguridad.</p>
@@ -373,7 +290,7 @@
       <div class="actions">
         <button class="btn btn-cancel" onclick="closeForm()">Cancelar</button>
         <button class="btn btn-whatsapp" onclick="enviarWhatsApp()">WhatsApp</button>
-        <button class="btn btn-whatsapp" style="background-color:#ff6f00;" onclick="enviarFormulario()">Enviar</button>
+        <button class="btn btn-whatsapp" style="background-color:#2563eb;" onclick="enviarFormulario()">Enviar</button>
       </div>
     </div>
   </div>
@@ -391,7 +308,6 @@
     const textoEncabezado = frases[Math.floor(Math.random() * frases.length)];
     const velocidadEscritura = 80;
     let i = 0;
-
     function escribirTitulo() {
       if (i < textoEncabezado.length) {
         document.getElementById("encabezado-animado").innerHTML += textoEncabezado.charAt(i);
@@ -406,45 +322,43 @@
     const motos = [
       {
         nombre: "AKT 125 NKD",
-        descripcion: "Liviana y confiable, perfecta para el tráfico urbano. Bajo consumo de combustible, mantenimiento sencillo y un diseño compacto que se adapta a cualquier ciudad.",
-        imagen: "https://diverxamotos.com/wp-content/uploads/2023/11/gris.jpg"
+        descripcion: "Liviana y ágil para moverte en la ciudad.",
+        imagen: "https://motocontrol.com.co/wp-content/uploads/2023/01/Akt-125-NKD.jpg"
       },
       {
-        nombre: "Yamaha FZ 2.0",
-        descripcion: "Combina fuerza y estética deportiva. Su motor de 150cc ofrece aceleración potente para trayectos dinámicos, mientras que su chasis robusto brinda estabilidad en curvas.",
-        imagen: "https://usados.crmotos.com/files/03-2024/ad10016/yamaha-fz-2-0-150-202998023_large.jpg"
+        nombre: "AKT 150 RT",
+        descripcion: "Perfecta para trayectos cortos y uso diario.",
+        imagen: "https://motocontrol.com.co/wp-content/uploads/2023/01/Akt-150-RT.jpg"
       },
       {
-        nombre: "Bajaj Pulsar NS 160",
-        descripcion: "Diseñada para largas distancias sin renunciar al estilo. Suspensión cómoda, frenos de disco y un motor preciso que responde rápido en carretera abierta o zonas urbanas.",
-        imagen: "https://www.rutamotor.com/wp-content/uploads/2023/01/bajaj-pulsar-rutamotor-03.jpg"
+        nombre: "AKT 180 NKD",
+        descripcion: "Potencia y diseño para los más exigentes.",
+        imagen: "https://motocontrol.com.co/wp-content/uploads/2023/01/Akt-180-NKD.jpg"
       },
       {
-        nombre: "Vespa Clásica",
-        descripcion: "Un ícono sobre ruedas. Elegancia italiana con diseño retro, ideal para quienes buscan estilo sin renunciar al confort. Perfecta para escapadas urbanas con personalidad.",
-        imagen: "https://www.motociclismo.es/uploads/s1/65/08/23/7/vespa-lml-star-4-tiempos.jpeg"
-      },
-      {
-        nombre: "Honda Twister 250",
-        descripcion: "Potente, versátil y segura. Su motor de 250cc rinde tanto en ciudad como en carretera. Ideal para conductores que buscan comodidad y rendimiento sin esfuerzo.",
-        imagen: "https://www.motorbikez.com/gallery/honda-twister-250-pic-7034.jpg"
+        nombre: "AKT 200 DUKE",
+        descripcion: "Deportiva y cómoda para largas rutas.",
+        imagen: "https://motocontrol.com.co/wp-content/uploads/2023/01/Akt-200-Duke.jpg"
       }
     ];
 
-    const motosContainer = document.getElementById("motosContainer");
-
-    motos.forEach(moto => {
-      const card = document.createElement("div");
-      card.classList.add("card");
-      card.innerHTML = `
-        <img src="${moto.imagen}" alt="${moto.nombre}">
-        <div class="card-content">
-          <h3>${moto.nombre}</h3>
-          <p>${moto.descripcion}</p>
-          <button onclick="openForm('${moto.nombre}')">Alquilar</button>
-        </div>`;
-      motosContainer.appendChild(card);
-    });
+    function mostrarMotos() {
+      const contenedor = document.getElementById("motosContainer");
+      motos.forEach((moto, index) => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+        card.innerHTML = `
+          <img src="${moto.imagen}" alt="${moto.nombre}" />
+          <div class="card-content">
+            <h3>${moto.nombre}</h3>
+            <p>${moto.descripcion}</p>
+            <button onclick="openForm('${moto.nombre}')">Alquilar</button>
+          </div>
+        `;
+        contenedor.appendChild(card);
+      });
+    }
+    window.onload = mostrarMotos;
 
     function openForm(moto) {
       document.getElementById("formModal").style.display = "flex";
@@ -453,45 +367,45 @@
 
     function closeForm() {
       document.getElementById("formModal").style.display = "none";
-      document.getElementById("nombre").value = "";
-      document.getElementById("telefono").value = "";
-      document.getElementById("correo").value = "";
-      document.getElementById("fecha").value = "";
-      document.getElementById("motoElegida").value = "";
     }
 
     function enviarWhatsApp() {
       const nombre = document.getElementById("nombre").value.trim();
       const telefono = document.getElementById("telefono").value.trim();
-      const moto = document.getElementById("motoElegida").value;
-      if (!nombre || !telefono || !moto) {
-        alert("Por favor, completa tu nombre, teléfono y selecciona una moto.");
+      const correo = document.getElementById("correo").value.trim();
+      const fecha = document.getElementById("fecha").value.trim();
+      const moto = document.getElementById("motoElegida").value.trim();
+
+      if (!nombre || !telefono || !correo || !fecha) {
+        alert("Por favor, completa todos los campos.");
         return;
       }
-      const mensaje = encodeURIComponent(`Hola, me interesa alquilar la moto "${moto}". Mi nombre es ${nombre} y mi teléfono es ${telefono}.`);
-      const url = `https://wa.me/573053263198?text=${mensaje}`;
-      window.open(url, "_blank");
+
+      const mensaje = `Hola, me gustaría alquilar la moto *${moto}*. \nNombre: ${nombre} \nTeléfono: ${telefono} \nCorreo: ${correo} \nFecha: ${fecha}`;
+      const urlWhatsApp = `https://wa.me/${telefono.replace(/\D/g, '')}?text=${encodeURIComponent(mensaje)}`;
+      window.open(urlWhatsApp, "_blank");
     }
 
     function enviarFormulario() {
-      alert("Funcionalidad de envío por formulario no implementada en esta demo.");
+      alert("Formulario enviado (simulación).");
+      closeForm();
     }
   </script>
 
   <script>
-    tsParticles.load("particles-js", {
+    tsParticles.load("bannerParticles", {
       fpsLimit: 60,
       particles: {
-        number: { value: 80, density: { enable: true, value_area: 900 } },
+        number: { value: 40, density: { enable: true, value_area: 400 } },
         color: { value: "#ff6f00" },
         shape: { type: "circle" },
-        opacity: { value: 0.6, random: true },
-        size: { value: 3, random: true },
-        move: { enable: true, speed: 1.5, direction: "none", random: true, out_mode: "out" }
+        opacity: { value: 0.5, random: true },
+        size: { value: 4, random: true },
+        move: { enable: true, speed: 1, direction: "none", random: true, out_mode: "out" }
       },
       interactivity: {
-        events: { onhover: { enable: true, mode: "repulse" } },
-        modes: { repulse: { distance: 120, duration: 0.4 } }
+        events: { onhover: { enable: true, mode: "bubble" } },
+        modes: { bubble: { distance: 100, size: 8, duration: 2, opacity: 1 } }
       },
       detectRetina: true
     });
