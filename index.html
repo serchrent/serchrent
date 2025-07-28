@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Serch Rent - Motos estilo tvOS</title>
   <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Text:wght@400;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
   <style>
     /* Reset */
     * {
@@ -14,19 +14,22 @@
       padding: 0;
     }
 
+    /* Usamos una fuente similar a tvOS (SF Pro Text) */
     body {
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-      background-color: #0a0a23;
-      color: white;
+      background-color: #000000;
+      color: #FFFFFF;
       min-height: 100vh;
-      overflow-x: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 60px 20px 40px;
+      justify-content: start;
+      padding-top: 80px;
+      overflow-x: hidden;
       user-select: none;
     }
 
+    /* Header estilo tvOS: simple, transparente, grande y con sombra */
     header {
       position: fixed;
       top: 20px;
@@ -36,311 +39,437 @@
       color: white;
       text-shadow: 0 0 12px rgba(255 255 255 / 0.6);
       cursor: default;
-      z-index: 1001;
-      user-select: none;
-      background: rgba(255 255 255 / 0.05);
-      padding: 8px 18px;
-      border-radius: 12px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 0 20px rgba(255 255 255 / 0.15);
-    }
-
-    /* Contenedor general de las motos */
-    .motos-container {
       display: flex;
-      gap: 28px;
-      overflow-x: auto;
-      padding-bottom: 20px;
-      max-width: 100vw;
-      scroll-behavior: smooth;
-      outline: none;
+      align-items: center;
+      gap: 14px;
+      z-index: 1000;
+      background: transparent;
       user-select: none;
     }
 
-    /* Scrollbar estilo macOS para que quede limpio y suave */
-    .motos-container::-webkit-scrollbar {
-      height: 10px;
+    header span {
+      font-size: 36px;
+      filter: drop-shadow(0 0 6px rgba(255 255 255 / 0.5));
     }
 
-    .motos-container::-webkit-scrollbar-thumb {
-      background: #444;
-      border-radius: 5px;
-    }
-
-    .motos-container::-webkit-scrollbar-track {
-      background: #111;
-    }
-
-    /* Cada tarjeta estilo tvOS app */
-    .moto-card {
-      background: linear-gradient(145deg, #1a1a1a, #111111);
+    /* Banner estilo tvOS */
+    .banner {
+      background: linear-gradient(90deg, #222222 0%, #1c1c1c 100%);
       border-radius: 24px;
-      width: 280px;
-      min-width: 280px;
+      width: 90vw;
+      max-width: 850px;
+      padding: 40px 60px;
+      margin-bottom: 50px;
       box-shadow:
-        0 12px 36px rgba(255 255 255 / 0.12),
-        inset 0 0 10px rgba(255 255 255 / 0.04);
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+        0 12px 40px rgba(255 255 255 / 0.1),
+        0 0 20px rgba(255 255 255 / 0.06);
+      backdrop-filter: saturate(180%) blur(40px);
+      -webkit-backdrop-filter: saturate(180%) blur(40px);
       display: flex;
       flex-direction: column;
+      align-items: center;
+      text-align: center;
       user-select: none;
-      opacity: 0;
-      transform: translateY(15px);
-      animation: fadeInUp 0.6s forwards;
-      animation-delay: var(--delay);
     }
 
-    @keyframes fadeInUp {
-      to {
+    .banner-content h2 {
+      font-size: 42px;
+      font-weight: 600;
+      margin-bottom: 18px;
+      letter-spacing: 0.04em;
+      text-shadow: 0 0 20px rgba(255 255 255 / 0.25);
+    }
+
+    .banner-content p {
+      font-size: 20px;
+      font-weight: 400;
+      margin-bottom: 28px;
+      max-width: 700px;
+      color: #d0d0d0;
+      text-shadow: 0 0 8px rgba(0 0 0 / 0.7);
+      letter-spacing: 0.03em;
+    }
+
+    /* Botón al estilo tvOS */
+    .btn-banner {
+      background: linear-gradient(180deg, #5a5aff 0%, #3737ff 100%);
+      border-radius: 16px;
+      padding: 14px 50px;
+      color: white;
+      font-weight: 700;
+      font-size: 22px;
+      text-transform: uppercase;
+      text-decoration: none;
+      box-shadow:
+        0 0 12px #5454ff,
+        0 8px 20px #2e2eff;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    .btn-banner:hover,
+    .btn-banner:focus {
+      outline: none;
+      transform: scale(1.05);
+      box-shadow:
+        0 0 20px #7f7fff,
+        0 12px 32px #5c5cff;
+    }
+
+    /* Animación texto grande tipo tvOS */
+    #encabezado-animado {
+      font-size: 36px;
+      font-weight: 600;
+      color: #c0c0c0;
+      letter-spacing: 0.05em;
+      max-width: 85vw;
+      text-align: center;
+      margin-bottom: 80px;
+      text-shadow: 0 0 12px rgba(255 255 255 / 0.2);
+      user-select: none;
+      min-height: 48px;
+    }
+
+    #encabezado-animado::after {
+      content: "|";
+      animation: blink 0.7s steps(1) infinite;
+      font-weight: 700;
+      color: #7f7fff;
+      margin-left: 4px;
+    }
+
+    @keyframes blink {
+      0%,
+      100% {
         opacity: 1;
-        transform: translateY(0);
       }
+
+      50% {
+        opacity: 0;
+      }
+    }
+
+    footer {
+      font-size: 14px;
+      font-weight: 400;
+      color: #606060;
+      margin-bottom: 20px;
+      user-select: none;
+    }
+
+    /* WhatsApp floating button estilo tvOS */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 36px;
+      right: 36px;
+      width: 68px;
+      height: 68px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, #00c853 0%, #009624 100%);
+      box-shadow:
+        0 0 18px #00e676,
+        0 8px 32px #00c853;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 36px;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      user-select: none;
+      z-index: 10000;
+    }
+
+    .whatsapp-float:hover,
+    .whatsapp-float:focus {
+      outline: none;
+      transform: scale(1.1);
+      box-shadow:
+        0 0 28px #00ff85,
+        0 12px 48px #00e676;
+    }
+
+    /* Particles background: solo puntos muy sutiles */
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* ----- NUEVO ESTILO PARA LISTA DE MOTOS ----- */
+
+    .motos-container {
+      display: flex;
+      overflow-x: auto;
+      padding: 20px 30px;
+      gap: 18px;
+      width: 90vw;
+      max-width: 850px;
+      margin-bottom: 60px;
+      scroll-behavior: smooth;
+      user-select: none;
+    }
+
+    .moto-card {
+      background: linear-gradient(145deg, #1e1e1e, #121212);
+      border-radius: 20px;
+      box-shadow:
+        0 6px 16px rgba(0, 0, 0, 0.7),
+        inset 0 0 6px rgba(255 255 255 / 0.05);
+      width: 240px;
+      flex-shrink: 0;
+      cursor: pointer;
+      outline-offset: 4px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+
+    .moto-card img {
+      width: 100%;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      height: 140px;
+      object-fit: cover;
+      user-select: none;
+    }
+
+    .moto-info {
+      padding: 14px 18px;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .moto-info h3 {
+      font-size: 20px;
+      font-weight: 600;
+      text-align: center;
+      color: #cccccc;
+      user-select: none;
     }
 
     .moto-card:focus,
     .moto-card:hover {
-      outline: none;
-      transform: scale(1.08);
       box-shadow:
-        0 18px 48px rgba(90 90 255 / 0.9),
-        inset 0 0 18px rgba(255 255 255 / 0.1);
-      border: 3px solid #5a5aff;
-      background: linear-gradient(145deg, #25254d, #1a1a4d);
-      z-index: 10;
+        0 0 18px #5a5aff,
+        0 12px 30px #3737ff;
+      transform: scale(1.05);
+      outline: none;
     }
 
-    .moto-card img {
-      border-radius: 24px 24px 0 0;
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-      user-select: none;
-      pointer-events: none;
-    }
+    /* Modal */
 
-    .moto-card .moto-info {
-      padding: 14px 20px 22px;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      user-select: none;
-    }
-
-    .moto-card .moto-info h3 {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 6px;
-      color: #e5e5ff;
-      text-shadow: 0 0 10px rgba(90 90 255 / 0.7);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    /* Modal de detalle */
-    .modal {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0.9);
-      width: 90vw;
-      max-width: 720px;
-      background: linear-gradient(145deg, #222244, #12122c);
-      border-radius: 36px;
-      box-shadow: 0 0 48px rgba(90 90 255 / 0.9);
-      padding: 30px;
-      color: #dcdcff;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.35s ease, transform 0.35s ease;
-      z-index: 1500;
-      user-select: none;
-      display: flex;
-      gap: 30px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .modal.active {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translate(-50%, -50%) scale(1);
-    }
-
-    .modal img {
-      max-width: 320px;
-      width: 100%;
-      border-radius: 28px;
-      box-shadow: 0 0 28px rgba(90 90 255 / 0.7);
-      object-fit: cover;
-      flex-shrink: 0;
-      user-select: none;
-    }
-
-    .modal-content {
-      flex: 1 1 auto;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 20px;
-      min-width: 260px;
-    }
-
-    .modal-content h2 {
-      font-size: 32px;
-      font-weight: 700;
-      text-shadow: 0 0 14px rgba(90 90 255 / 0.8);
-      margin-bottom: 12px;
-      user-select: text;
-    }
-
-    .modal-content p {
-      font-size: 18px;
-      line-height: 1.5;
-      color: #b0b0d1;
-      user-select: text;
-      max-height: 200px;
-      overflow-y: auto;
-      scrollbar-width: thin;
-      scrollbar-color: #5a5aff transparent;
-    }
-
-    .modal-content p::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    .modal-content p::-webkit-scrollbar-thumb {
-      background-color: #5a5aff;
-      border-radius: 4px;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      font-size: 28px;
-      font-weight: 700;
-      color: #aaaaff;
-      cursor: pointer;
-      user-select: none;
-      transition: color 0.25s ease;
-      background: none;
-      border: none;
-    }
-
-    .modal-close:hover {
-      color: white;
-    }
-
-    /* Fondo de overlay */
     .overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(6px);
+      background: rgba(0, 0, 0, 0.75);
       opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.35s ease;
-      z-index: 1400;
+      visibility: hidden;
+      transition: opacity 0.3s ease;
+      z-index: 2000;
     }
 
     .overlay.active {
       opacity: 1;
-      pointer-events: auto;
+      visibility: visible;
     }
 
-    /* Responsive */
-    @media (max-width: 480px) {
-      .moto-card {
-        width: 220px;
-        min-width: 220px;
-      }
+    .modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      max-width: 500px;
+      width: 90vw;
+      background: #121212;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 0 32px #3737ffaa;
+      transform: translate(-50%, -50%) scale(0.9);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      color: #eee;
+      z-index: 2100;
+      user-select: text;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
 
-      .modal {
-        width: 95vw;
-        padding: 20px;
-        flex-direction: column;
-        gap: 18px;
-      }
+    .modal.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, -50%) scale(1);
+    }
 
-      .modal img {
-        max-width: 100%;
-      }
+    .modal img {
+      width: 100%;
+      border-radius: 14px;
+      object-fit: cover;
+      max-height: 220px;
+      user-select: none;
+      box-shadow: 0 0 12px #5a5affaa;
+    }
 
-      .modal-content h2 {
-        font-size: 26px;
-      }
+    .modal h2 {
+      font-weight: 700;
+      font-size: 28px;
+      color: #5a5aff;
+      margin-bottom: 12px;
+      text-align: center;
+    }
 
-      .modal-content p {
-        font-size: 16px;
-        max-height: 150px;
-      }
+    .modal p {
+      font-size: 16px;
+      line-height: 1.4;
+      color: #ccc;
+      text-align: justify;
+    }
+
+    .modal-close {
+      align-self: flex-end;
+      background: transparent;
+      border: none;
+      color: #5a5aff;
+      font-size: 32px;
+      cursor: pointer;
+      user-select: none;
+      padding: 0 8px;
+      margin-bottom: 10px;
+      transition: color 0.2s ease;
+    }
+
+    .modal-close:hover,
+    .modal-close:focus {
+      color: #7f7fff;
+      outline: none;
     }
   </style>
 </head>
 
 <body>
-  <header>🏍️ Serch Rent</header>
 
-  <main>
-    <div class="motos-container" tabindex="0" aria-label="Lista de motos disponibles"></div>
-  </main>
+  <header><span>🏍️</span> Serch Rent</header>
 
-  <!-- Modal detalle moto -->
-  <div class="overlay" tabindex="-1"></div>
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc" tabindex="0">
-    <button class="modal-close" aria-label="Cerrar">&times;</button>
-    <img src="" alt="" />
-    <div class="modal-content">
-      <h2 id="modal-title"></h2>
-      <p id="modal-desc"></p>
+  <div class="banner">
+    <div class="banner-content">
+      <h2>¡Alquila tu moto ideal hoy mismo!</h2>
+      <p>Disfruta la libertad de moverte con estilo, rapidez y seguridad.</p>
+      <a href="javascript:void(0)" class="btn-banner" onclick="abrirWhatsApp()">Contáctanos</a>
     </div>
   </div>
 
+  <h1 id="encabezado-animado"></h1>
+
+  <!-- CONTENEDOR DE MOTOS CON TARJETAS -->
+  <div class="motos-container" aria-label="Lista de motos disponibles" role="list"></div>
+
+  <!-- MODAL PARA INFO DETALLADA -->
+  <div class="overlay" tabindex="-1"></div>
+  <aside class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc" tabindex="0">
+    <button class="modal-close" aria-label="Cerrar modal">&times;</button>
+    <h2 id="modal-title"></h2>
+    <img src="" alt="" />
+    <p id="modal-desc"></p>
+  </aside>
+
+  <div id="particles-js"></div>
+
+  <footer>© 2025 Serch Rent.</footer>
+
+  <div class="whatsapp-float" title="Contactar por WhatsApp" onclick="abrirWhatsApp()">📱</div>
+
   <script>
+    // Animación encabezado
+    const frases = [
+      "Alquila tu moto ideal para cada aventura",
+      "Explora la ciudad con libertad y estilo",
+      "Conduce con potencia, seguridad y elegancia",
+      "Tu viaje comienza con nosotros",
+      "Descubre las mejores motos sin complicaciones",
+      "Rápido, cómodo y al mejor precio"
+    ];
+    let textoEncabezado = frases[Math.floor(Math.random() * frases.length)];
+    const velocidadEscritura = 80;
+    let i = 0;
+    function escribirTitulo() {
+      if (i < textoEncabezado.length) {
+        document.getElementById("encabezado-animado").innerHTML += textoEncabezado.charAt(i);
+        i++;
+        setTimeout(escribirTitulo, velocidadEscritura);
+      }
+    }
+    window.addEventListener("load", escribirTitulo);
+
+    // WhatsApp button function
+    function abrirWhatsApp() {
+      const negocioTelefono = "666666666"; // Cambia este número por el tuyo
+      const mensaje = encodeURIComponent("Hola, estoy interesado en alquilar una moto. ¡Quisiera más información!");
+      window.open(`https://wa.me/${negocioTelefono}?text=${mensaje}`, "_blank");
+    }
+
+    // Particles config
+    tsParticles.load("particles-js", {
+      particles: {
+        number: { value: 25 },
+        color: { value: "#ffffff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.1 },
+        size: { value: 2 },
+        move: {
+          enable: true,
+          speed: 0.5,
+          direction: "none",
+          outModes: "bounce"
+        }
+      },
+      background: {
+        color: "transparent"
+      },
+      fullScreen: { enable: false }
+    });
+
+    // DATOS DE MOTOS (ejemplo)
     const motos = [
       {
-        nombre: "AKT 125 NKD",
-        descripcion: "Liviana y confiable, perfecta para el tráfico urbano. Bajo consumo de combustible, mantenimiento sencillo y un diseño compacto que se adapta a cualquier ciudad.",
-        imagen: "https://diverxamotos.com/wp-content/uploads/2023/11/gris.jpg"
-      },
-      {
-        nombre: "Yamaha FZ 2.0",
-        descripcion: "Combina fuerza y estética deportiva. Su motor de 150cc ofrece aceleración potente para trayectos dinámicos, mientras que su chasis robusto brinda estabilidad en curvas.",
-        imagen: "https://usados.crmotos.com/files/03-2024/ad10016/yamaha-fz-2-0-150-202998023_large.jpg"
-      },
-      {
-        nombre: "Bajaj Pulsar NS 160",
-        descripcion: "Diseñada para largas distancias sin renunciar al estilo. Suspensión cómoda, frenos de disco y un motor preciso que responde rápido en carretera abierta o zonas urbanas.",
-        imagen: "https://www.rutamotor.com/wp-content/uploads/2023/01/bajaj-pulsar-rutamotor-03.jpg"
-      },
-      {
-        nombre: "Vespa Clásica",
-        descripcion: "Un ícono sobre ruedas. Elegancia italiana con diseño retro, ideal para quienes buscan estilo sin renunciar al confort. Perfecta para escapadas urbanas con personalidad.",
-        imagen: "https://www.motociclismo.es/uploads/s1/65/08/23/7/vespa-lml-star-4-tiempos.jpeg"
-      },
-      {
-        nombre: "Honda Twister 250",
-        descripcion: "Potente, versátil y segura. Su motor de 250cc rinde tanto en ciudad como en carretera. Ideal para conductores que buscan comodidad y rendimiento sin esfuerzo.",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/CBF_250.jpg/1200px-CBF_250.jpg"
-      },
-      {
-        nombre: "Honda ADV 350",
-        descripcion: "La aventura sobre dos ruedas. Estilo SUV, suspensión inteligente y espacio bajo el asiento para equipaje. Perfecta para quienes buscan explorar más allá del asfalto.",
+        nombre: "Honda CBR500R",
+        descripcion: "Una moto deportiva ligera y ágil, perfecta para la ciudad y rutas cortas. Motor bicilíndrico de 471 cc y diseño moderno.",
         imagen: "https://cdn.dealerspike.com/imglib/resize/800x600/2024/07/16/6f4b13af-4749-4032-9e7a-c73085d7ed56.jpg"
+      },
+      {
+        nombre: "Yamaha MT-07",
+        descripcion: "De estilo naked, muy popular por su potencia y facilidad de manejo. Motor de 689 cc con excelente respuesta y confort.",
+        imagen: "https://cdn.motor1.com/images/mgl/3M2do/s3/yamaha-mt-07-2021.jpg"
+      },
+      {
+        nombre: "KTM Duke 390",
+        descripcion: "Moto ligera y agresiva, con tecnología avanzada y motor monocilíndrico de 373 cc, ideal para quienes buscan adrenalina y maniobrabilidad.",
+        imagen: "https://cdn.motor1.com/images/mgl/zw8oW/s3/ktm-duke-390-2020.jpg"
+      },
+      {
+        nombre: "Suzuki V-Strom 650",
+        descripcion: "Perfecta para aventura y viajes largos. Motor bicilíndrico de 645 cc, cómoda y con buen rendimiento en carretera y caminos de tierra.",
+        imagen: "https://cdn.motor1.com/images/mgl/0dO0E/s3/suzuki-v-strom-650.jpg"
       }
     ];
 
     const container = document.querySelector('.motos-container');
 
-    // Crear y añadir las tarjetas con delay para animación escalonada
+    // Crear tarjetas y añadirlas al contenedor
     motos.forEach((moto, index) => {
       const card = document.createElement('div');
       card.classList.add('moto-card');
-      card.setAttribute('tabindex', '0'); // para que sea focusable por teclado
+      card.setAttribute('tabindex', '0'); // para ser focusable por teclado
+      card.setAttribute('role', 'listitem');
       card.style.setProperty('--delay', `${index * 0.1}s`);
 
       card.innerHTML = `
@@ -350,7 +479,7 @@
         </div>
       `;
 
-      // Al hacer click o enter, abrir modal
+      // Al hacer click o Enter/Espacio abrir modal
       card.addEventListener('click', () => openModal(moto));
       card.addEventListener('keydown', e => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -362,13 +491,13 @@
       container.appendChild(card);
     });
 
-    // Modal
+    // Modal y overlay
     const modal = document.querySelector('.modal');
     const overlay = document.querySelector('.overlay');
     const modalTitle = modal.querySelector('#modal-title');
     const modalDesc = modal.querySelector('#modal-desc');
     const modalImg = modal.querySelector('img');
-    const btnClose = modal.querySelector('.modal-close');
+    const closeBtn = modal.querySelector('.modal-close');
 
     function openModal(moto) {
       modalTitle.textContent = moto.nombre;
@@ -383,51 +512,19 @@
     function closeModal() {
       modal.classList.remove('active');
       overlay.classList.remove('active');
-      container.querySelector('.moto-card:focus')?.focus();
     }
 
-    btnClose.addEventListener('click', closeModal);
+    closeBtn.addEventListener('click', closeModal);
     overlay.addEventListener('click', closeModal);
 
+    // Cerrar modal con ESC
     window.addEventListener('keydown', e => {
       if (e.key === 'Escape' && modal.classList.contains('active')) {
         closeModal();
       }
     });
-
-    // Navegación teclado tipo Apple TV
-
-    container.addEventListener('keydown', e => {
-      const focusElem = document.activeElement;
-      if (!focusElem.classList.contains('moto-card')) return;
-
-      let newFocusIndex;
-      const cards = Array.from(container.querySelectorAll('.moto-card'));
-      const currentIndex = cards.indexOf(focusElem);
-
-      if (e.key === 'ArrowRight') {
-        newFocusIndex = (currentIndex + 1) % cards.length;
-        e.preventDefault();
-      } else if (e.key === 'ArrowLeft') {
-        newFocusIndex = (currentIndex - 1 + cards.length) % cards.length;
-        e.preventDefault();
-      } else {
-        return;
-      }
-
-      cards[newFocusIndex].focus();
-
-      // Auto-scroll para mantener el foco visible
-      cards[newFocusIndex].scrollIntoView({ behavior: 'smooth', inline: 'center' });
-    });
-
-    // Al abrir la página, enfocar la primera moto para que el usuario pueda navegar de inmediato
-    window.addEventListener('load', () => {
-      const firstCard = container.querySelector('.moto-card');
-      if (firstCard) firstCard.focus();
-    });
   </script>
+
 </body>
 
 </html>
-
